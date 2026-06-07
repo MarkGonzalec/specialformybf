@@ -3,297 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Милый Квиз ✨</title>
+    <title>Важный вопросик...</title>
     <style>
         body {
-            background-color: #ffeef2;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-        }
-
-        .quiz-container {
-            background: white;
-            padding: 30px;
-            border-radius: 24px;
-            box-shadow: 0 10px 25px rgba(255, 182, 193, 0.4);
+            background-color: #ffe6e6; /* Нежно-розовый фон */
+            font-family: 'Comic Sans MS', cursive, sans-serif; /* Мемный шрифт */
+            overflow: hidden; /* Чтобы не появлялись скроллы, когда кнопка убегает за края */
             text-align: center;
-            max-width: 450px;
-            width: 90%;
-            border: 2px solid #ffb3ba;
-            box-sizing: border-box;
-        }
-
-        h2 {
-            color: #ff6b8b;
-            margin-bottom: 20px;
-            font-size: 22px;
-        }
-
-        .step {
-            display: none;
-        }
-
-        .step.active {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .btn {
-            background: #ff6b8b;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-            box-shadow: 0 4px 10px rgba(255, 107, 139, 0.3);
-        }
-
-        .btn:hover {
-            background: #ff4771;
-            transform: translateY(-2px);
-        }
-
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border: 2px solid #ffd1d6;
-            border-radius: 12px;
-            box-sizing: border-box;
-            outline: none;
-            font-size: 16px;
-            font-family: inherit;
-            transition: border-color 0.3s;
-        }
-
-        input[type="text"]:focus, textarea:focus {
-            border-color: #ff6b8b;
-        }
-
-        textarea {
-            resize: none;
-            height: 80px;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .option-btn {
-            background: #fff0f2;
-            color: #4a4a4a;
-            border: 2px solid #ffd1d6;
-            padding: 12px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.2s;
-        }
-
-        .option-btn:hover {
-            background: #ffe1e6;
-            border-color: #ff6b8b;
-        }
-
-        .loader {
-            display: none;
-            color: #ff6b8b;
-            font-weight: bold;
-            margin-top: 15px;
         }
         
-        .progress {
-            font-size: 12px;
-            color: #ffb3ba;
-            margin-top: 15px;
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #ff4d4d;
+            margin-bottom: 20px;
+        }
+
+        img {
+            width: 220px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            position: relative;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #btnYes {
+            background-color: #4CAF50;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        #btnYes:hover {
+            transform: scale(1.1);
+        }
+
+        #btnNo {
+            background-color: #ff4d4d;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            /* Абсолютное позиционирование, чтобы скрипт мог ее двигать */
+            position: absolute; 
+            left: 55%; /* Изначальная позиция рядом с кнопкой Да */
         }
     </style>
 </head>
 <body>
 
-<div class="quiz-container">
-    <div class="step active" id="step1">
-        <h2>Привет! Как тебя зовут? 💕</h2>
-        <input type="text" id="nameInput" placeholder="Твое имя...">
-        <button class="btn" onclick="nextStep(1, 2)">Далее ✨</button>
-        <div class="progress">Вопрос 1 из 8</div>
-    </div>
-
-    <div class="step" id="step2">
-        <h2>Какое у тебя сейчас настроение? 🦄</h2>
-        <div class="options">
-            <button class="option-btn" onclick="selectOption('Настроение', 'Супер-пупер 🥰', 2, 3)">Супер-пупер 🥰</button>
-            <button class="option-btn" onclick="selectOption('Настроение', 'Немного устал(а) ☕', 2, 3)">Немного устал(а) ☕</button>
-            <button class="option-btn" onclick="selectOption('Настроение', 'Хочу обнимашек 🧸', 2, 3)">Хочу обнимашек 🧸</button>
-        </div>
-        <div class="progress">Вопрос 2 из 8</div>
-    </div>
-
-    <div class="step" id="step3">
-        <h2>Что выберем на вечер? 🍕</h2>
-        <div class="options">
-            <button class="option-btn" onclick="selectOption('План на вечер', 'Пицца и сериалы 🎬', 3, 4)">Пицца и сериалы 🎬</button>
-            <button class="option-btn" onclick="selectOption('План на вечер', 'Прогулка под луной 🌙', 3, 4)">Прогулка под луной 🌙</button>
-            <button class="option-btn" onclick="selectOption('План на вечер', 'Спаааать 😴', 3, 4)">Спаааать 😴</button>
-        </div>
-        <div class="progress">Вопрос 3 из 8</div>
-    </div>
-
-    <div class="step" id="step4">
-        <h2>Твой идеальный десерт прямо сейчас? 🍰</h2>
-        <div class="options">
-            <button class="option-btn" onclick="selectOption('Десерт', 'Мороженое 🍦', 4, 5)">Мороженое 🍦</button>
-            <button class="option-btn" onclick="selectOption('Десерт', 'Шоколадка 🍫', 4, 5)">Шоколадка 🍫</button>
-            <button class="option-btn" onclick="selectOption('Десерт', 'Свежие фрукты 🍓', 4, 5)">Свежие фрукты 🍓</button>
-            <button class="option-btn" onclick="selectOption('Десерт', 'Я на массе, давай мясо 🥩', 4, 5)">Я на массе, давай мясо 🥩</button>
-        </div>
-        <div class="progress">Вопрос 4 из 8</div>
-    </div>
-
-    <div class="step" id="step5">
-        <h2>Какое животное описывает твой вайб сегодня? 🐾</h2>
-        <div class="options">
-            <button class="option-btn" onclick="selectOption('Вайб', 'Ленивый котик 🐈', 5, 6)">Ленивый котик 🐈</button>
-            <button class="option-btn" onclick="selectOption('Вайб', 'Энергичный щенок 🐕', 5, 6)">Энергичный щенок 🐕</button>
-            <button class="option-btn" onclick="selectOption('Вайб', 'Жующая панда 🐼', 5, 6)">Жующая панда 🐼</button>
-        </div>
-        <div class="progress">Вопрос 5 из 8</div>
-    </div>
-
-    <div class="step" id="step6">
-        <h2>Что бы ты хотел(а) получить в подарок? 🎁</h2>
-        <div class="options">
-            <button class="option-btn" onclick="selectOption('Подарок', 'Много цветов 🌷', 6, 7)">Много цветов 🌷</button>
-            <button class="option-btn" onclick="selectOption('Подарок', 'Вкусняшки 🍩', 6, 7)">Вкусняшки 🍩</button>
-            <button class="option-btn" onclick="selectOption('Подарок', 'Билет на море ✈️', 6, 7)">Билет на море ✈️</button>
-            <button class="option-btn" onclick="selectOption('Подарок', 'Внимание и заботу ❤️', 6, 7)">Внимание и заботу ❤️</button>
-        </div>
-        <div class="progress">Вопрос 6 из 8</div>
-    </div>
-
-    <div class="step" id="step7">
-        <h2>Какая музыка играет в сердечке? 🎵</h2>
-        <div class="options">
-            <button class="option-btn" onclick="selectOption('Музыка', 'Спокойный Lo-Fi / Чилл 🎧', 7, 8)">Спокойный Lo-Fi / Чилл 🎧</button>
-            <button class="option-btn" onclick="selectOption('Музыка', 'Драйвовый Рок / Поп 🎸', 7, 8)">Драйвовый Рок / Поп 🎸</button>
-            <button class="option-btn" onclick="selectOption('Музыка', 'Слушаю тишину 🤫', 7, 8)">Слушаю тишину 🤫</button>
-        </div>
-        <div class="progress">Вопрос 7 из 8</div>
-    </div>
-
-    <div class="step" id="step8">
-        <h2>И последнее: напиши мне данные своей карточки и паспорта! 💌</h2>
-        <textarea id="messageInput" placeholder="Не бойся! Всё анонимно...)"></textarea>
-        <button class="btn" onclick="nextStep(8, 'final')">Отправить ответы! 🚀</button>
-        <div class="progress">Вопрос 8 из 8</div>
-    </div>
-
-    <div class="step" id="stepFinal">
-        <h2>Спасибо за ответы! Отправляю... 🌸</h2>
-        <div class="loader" id="loader">Секундочку... ✨</div>
-        <div id="successMessage" style="display:none; color: #4caf50; font-weight: bold; margin-top: 20px;">
-            Все ответы успешно улетели! 🎉<br>Отличного дня! Беб 💕
-        </div>
+<div class="container" id="mainContainer">
+    
+    <h1 id="question">Ты будешь моим парнем? 👉👈</h1>
+    
+    <div class="buttons">
+        <button id="btnYes">Да!</button>
+        <button id="btnNo">Нет</button>
     </div>
 </div>
 
 <script>
-    // ВАЖНО: Не забудь вставить свои данные!
-    const TELEGRAM_BOT_TOKEN = '8268296983:AAGyJ0n8RyEoIR-6x1ZFWsxbFMR9a2SKRMA';
-    const TELEGRAM_CHAT_ID = '7720768832';
+    const btnNo = document.getElementById('btnNo');
+    const btnYes = document.getElementById('btnYes');
+    const question = document.getElementById('question');
+    const gif = document.getElementById('gif');
 
-    let answers = {};
-
-    function nextStep(current, next) {
-        // Проверка заполнения текстового поля для 1-го вопроса
-        if (current === 1) {
-            const name = document.getElementById('nameInput').value.trim();
-            if (!name) {
-                alert('Пожалуйста, введи имя! 🥺');
-                return;
-            }
-            answers['Имя'] = name;
-        }
-
-        // Проверка заполнения текстового поля для 8-го вопроса
-        if (current === 8) {
-            const message = document.getElementById('messageInput').value.trim();
-            if (!message) {
-                alert('Напиши хоть пару словечек! 🥺');
-                return;
-            }
-            answers['Послание'] = message;
-        }
-
-        // Скрываем текущий шаг
-        document.getElementById(`step${current}`).classList.remove('active');
+    // Функция, которая заставляет кнопку убегать
+    function moveButton() {
+        // Убираем кнопку из обычного потока документа, чтобы она летала по всему экрану
+        btnNo.style.position = 'fixed';
         
-        // Показываем следующий или финал
-        if (next === 'final') {
-            document.getElementById('stepFinal').classList.add('active');
-            sendAnswersToTelegram();
-        } else {
-            document.getElementById(`step${next}`).classList.add('active');
-        }
+        // Вычисляем случайные координаты внутри видимого окна
+        const maxX = window.innerWidth - btnNo.offsetWidth;
+        const maxY = window.innerHeight - btnNo.offsetHeight;
+        
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
+
+        // Применяем новые координаты
+        btnNo.style.left = `${randomX}px`;
+        btnNo.style.top = `${randomY}px`;
     }
 
-    function selectOption(question, value, currentStep, nextStepNum) {
-        answers[question] = value;
-        nextStep(currentStep, nextStepNum);
-    }
+    // Триггер для компьютеров (наведение мыши)
+    btnNo.addEventListener('mouseover', moveButton);
+    
+    // Триггер для смартфонов (касание экрана)
+    btnNo.addEventListener('touchstart', (e) => {
+        e.preventDefault(); // Запрещаем браузеру регистрировать стандартное нажатие
+        moveButton();
+    }, { passive: false });
+    
+    // На всякий случай добавляем убегание и по клику
+    btnNo.addEventListener('click', moveButton);
 
-    function sendAnswersToTelegram() {
-        const loader = document.getElementById('loader');
-        const successMessage = document.getElementById('successMessage');
-        loader.style.display = 'block';
-
-        let text = `✨ <b>Новые ответы на тест!</b> ✨\n\n`;
-        for (const [key, value] of Object.entries(answers)) {
-            text += `🌸 <b>${key}:</b> ${value}\n`;
-        }
-
-        const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                chat_id: TELEGRAM_CHAT_ID,
-                text: text,
-                parse_mode: 'HTML'
-            })
-        })
-        .then(response => {
-            if (response.ok) {
-                loader.style.display = 'none';
-                successMessage.style.display = 'block';
-            } else {
-                alert('Ой, что-то пошло не так при отправке 😢');
-            }
-        })
-        .catch(error => {
-            console.error('Ошибка:', error);
-            alert('Ошибка сети 💔');
-        });
-    }
+    // Счастливый конец, если нажали "Да"
+    btnYes.addEventListener('click', () => {
+        question.innerText = "Ура! Я так и знал! 🥰❤️";
+        // Меняем гифку на победную с мишками
+        gif.src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif"; 
+        
+        // Прячем обе кнопки
+        btnNo.style.display = 'none';
+        btnYes.style.display = 'none';
+    });
 </script>
 
 </body>
