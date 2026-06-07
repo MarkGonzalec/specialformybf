@@ -79,7 +79,8 @@
 <body>
 
 <div class="container" id="mainContainer">
-    
+    <!-- Стартовая милая гифка -->
+  
     <h1 id="question">Ты будешь моим парнем? 👉👈</h1>
     
     <div class="buttons">
@@ -116,7 +117,7 @@
     
     // Триггер для смартфонов (касание экрана)
     btnNo.addEventListener('touchstart', (e) => {
-        e.preventDefault(); // Запрещаем браузеру регистрировать стандартное нажатие
+        e.preventDefault(); // Запрещаем браузеру регистрировать нажатие
         moveButton();
     }, { passive: false });
     
@@ -126,7 +127,7 @@
     // Счастливый конец, если нажали "Да"
     btnYes.addEventListener('click', () => {
         question.innerText = "Ура! Я так и знал! 🥰❤️";
-        // Меняем гифку на победную с мишками
+        // Меняем гифку на другую
         gif.src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif"; 
         
         // Прячем обе кнопки
