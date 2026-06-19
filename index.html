@@ -1,140 +1,843 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Важный вопросик...</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #ffe6e6; /* Нежно-розовый фон */
-            font-family: 'Comic Sans MS', cursive, sans-serif; /* Мемный шрифт */
-            overflow: hidden; /* Чтобы не появлялись скроллы, когда кнопка убегает за края */
-            text-align: center;
-        }
-        
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            position: relative;
-            z-index: 10;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Английский онлайн — репетитор с опытом 10 лет</title>
+<meta name="description" content="Онлайн-репетитор английского языка. Разговорный английский, подготовка к IELTS, бизнес-английский. Занятия из любой точки мира.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        h1 {
-            color: #ff4d4d;
-            margin-bottom: 20px;
-        }
+  :root {
+    --navy: #0f1f3d;
+    --navy-light: #1a3260;
+    --cream: #f7f4ef;
+    --cream-dark: #ede9e1;
+    --coral: #e8542a;
+    --coral-light: #f06b42;
+    --white: #ffffff;
+    --text-muted: #6b7a99;
+    --text-body: #2d3a52;
+    --border: rgba(15,31,61,0.1);
+  }
 
-        img {
-            width: 220px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
+  html { scroll-behavior: smooth; }
 
-        .buttons {
-            position: relative;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            align-items: center;
-        }
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-body);
+    background: var(--cream);
+    line-height: 1.6;
+    font-size: 16px;
+  }
 
-        button {
-            padding: 12px 30px;
-            font-size: 18px;
-            font-weight: bold;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(247,244,239,0.92);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1100px; margin: 0 auto;
+    padding: 0 2rem;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--navy);
+    text-decoration: none;
+    letter-spacing: -0.03em;
+  }
+  .logo span { color: var(--coral); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta {
+    background: var(--coral);
+    color: var(--white) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    font-weight: 600 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--coral-light) !important; }
 
-        #btnYes {
-            background-color: #4CAF50;
-            color: white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
+  /* HERO */
+  .hero {
+    padding: 140px 2rem 100px;
+    max-width: 1100px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(232,84,42,0.1);
+    color: var(--coral);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--coral);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .hero h1 {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(2.4rem, 4vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--coral);
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+    max-width: 480px;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--coral);
+    color: var(--white);
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--coral-light); transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--navy);
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1.5px solid var(--navy);
+    transition: background 0.2s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { background: rgba(15,31,61,0.06); }
 
-        #btnYes:hover {
-            transform: scale(1.1);
-        }
+  /* HERO VISUAL */
+  .hero-visual {
+    position: relative;
+  }
+  .chat-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 60px rgba(15,31,61,0.08);
+  }
+  .chat-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy), var(--navy-light));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; color: var(--white); font-size: 1rem;
+  }
+  .chat-name { font-weight: 600; font-size: 0.95rem; color: var(--navy); }
+  .chat-status { font-size: 0.8rem; color: #34c759; font-weight: 500; }
+  .msg { margin-bottom: 1rem; }
+  .msg-teacher {
+    background: var(--navy);
+    color: var(--white);
+    padding: 0.75rem 1rem;
+    border-radius: 16px 16px 16px 4px;
+    font-size: 0.9rem;
+    max-width: 85%;
+    line-height: 1.5;
+  }
+  .msg-student {
+    background: var(--cream);
+    color: var(--navy);
+    padding: 0.75rem 1rem;
+    border-radius: 16px 16px 4px 16px;
+    font-size: 0.9rem;
+    max-width: 85%;
+    margin-left: auto;
+    line-height: 1.5;
+  }
+  .msg-tag {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .msg-tag-right { text-align: right; margin-right: 2px; }
+  .type-cursor {
+    display: inline-block;
+    width: 2px; height: 14px;
+    background: var(--coral);
+    margin-left: 2px;
+    animation: blink 0.8s steps(1) infinite;
+    vertical-align: middle;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .stats-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1rem; margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.5rem; font-weight: 800;
+    color: var(--navy); line-height: 1;
+    display: block;
+  }
+  .stat-label { font-size: 0.72rem; color: var(--text-muted); font-weight: 500; margin-top: 3px; display: block; }
 
-        #btnNo {
-            background-color: #ff4d4d;
-            color: white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            /* Абсолютное позиционирование, чтобы скрипт мог ее двигать */
-            position: absolute; 
-            left: 55%; /* Изначальная позиция рядом с кнопкой Да */
-        }
-    </style>
+  /* SECTION COMMON */
+  .section {
+    padding: 100px 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-full {
+    padding: 100px 2rem;
+    background: var(--white);
+  }
+  .section-full-inner {
+    max-width: 1100px; margin: 0 auto;
+  }
+  .section-tag {
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .section-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--navy);
+    margin-bottom: 1rem;
+    line-height: 1.15;
+  }
+  .section-sub {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 5rem;
+    align-items: center;
+    margin-top: 4rem;
+  }
+  .about-photo-wrap {
+    position: relative;
+  }
+  .about-photo-placeholder {
+    aspect-ratio: 3/4;
+    background: var(--navy);
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    color: rgba(255,255,255,0.3);
+    font-size: 0.85rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-photo-placeholder::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 40%;
+    background: linear-gradient(to top, rgba(232,84,42,0.3), transparent);
+  }
+  .photo-icon {
+    font-size: 3rem;
+    opacity: 0.25;
+  }
+  .badge-float {
+    position: absolute;
+    background: var(--white);
+    border-radius: 12px;
+    padding: 12px 16px;
+    box-shadow: 0 8px 24px rgba(15,31,61,0.12);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--navy);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .badge-float.b1 { bottom: -20px; right: -20px; }
+  .badge-float.b2 { top: 30px; left: -20px; }
+  .badge-dot { width: 8px; height: 8px; border-radius: 50%; background: #34c759; flex-shrink: 0; }
+  .about-text p {
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+    font-size: 1.02rem;
+  }
+  .about-text p strong { color: var(--navy); }
+  .certs {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-top: 2rem;
+  }
+  .cert {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* WHY */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+  .why-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .why-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(15,31,61,0.08); }
+  .why-icon {
+    width: 48px; height: 48px;
+    background: rgba(232,84,42,0.1);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1.25rem;
+  }
+  .why-card h3 {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700; font-size: 1.05rem;
+    color: var(--navy); margin-bottom: 0.75rem;
+  }
+  .why-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; }
+
+  /* FORMATS */
+  .formats-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 4rem;
+  }
+  .format-card {
+    background: var(--cream);
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .format-card.featured {
+    background: var(--navy);
+    color: var(--white);
+  }
+  .format-card.featured .format-desc { color: rgba(255,255,255,0.65); }
+  .format-card.featured .format-feature { color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.15); }
+  .format-card.featured .format-price { color: var(--white); }
+  .format-card.featured .format-period { color: rgba(255,255,255,0.5); }
+  .format-card.featured .btn-primary { background: var(--coral); }
+  .popular-tag {
+    position: absolute; top: 1.25rem; right: 1.25rem;
+    background: var(--coral);
+    color: var(--white);
+    font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 4px 10px; border-radius: 100px;
+    text-transform: uppercase;
+  }
+  .format-name {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.1rem; font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+  .format-card.featured .format-name { color: var(--white); }
+  .format-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.6; }
+  .format-price {
+    font-family: 'Manrope', sans-serif;
+    font-size: 2rem; font-weight: 800;
+    color: var(--navy); line-height: 1;
+  }
+  .format-period { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.75rem; margin-top: 4px; }
+  .format-features { list-style: none; margin-bottom: 2rem; }
+  .format-feature {
+    font-size: 0.875rem; color: var(--text-body);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .format-feature::before {
+    content: '✓';
+    color: var(--coral); font-weight: 700; flex-shrink: 0;
+  }
+  .format-card.featured .format-feature::before { color: #4cd964; }
+  .format-cta { display: block; text-align: center; }
+
+  /* REVIEWS */
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 4rem;
+  }
+  .review-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+  }
+  .stars { color: #f5c32c; margin-bottom: 1rem; font-size: 1rem; letter-spacing: 2px; }
+  .review-text { font-size: 0.9rem; line-height: 1.7; color: var(--text-muted); margin-bottom: 1.5rem; font-style: italic; }
+  .reviewer { display: flex; align-items: center; gap: 12px; }
+  .reviewer-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.85rem; color: var(--white);
+    flex-shrink: 0;
+  }
+  .reviewer-name { font-weight: 600; font-size: 0.875rem; color: var(--navy); }
+  .reviewer-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+
+  /* CTA */
+  .cta-section {
+    background: var(--navy);
+    padding: 100px 2rem;
+    text-align: center;
+  }
+  .cta-section h2 {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.04em;
+    margin-bottom: 1rem;
+    line-height: 1.15;
+  }
+  .cta-section p {
+    color: rgba(255,255,255,0.6);
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+    margin-left: auto; margin-right: auto;
+    line-height: 1.6;
+  }
+  .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-white {
+    background: var(--white);
+    color: var(--navy);
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem; font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity 0.2s;
+  }
+  .btn-white:hover { opacity: 0.9; }
+  .btn-outline-white {
+    border: 1.5px solid rgba(255,255,255,0.3);
+    color: var(--white);
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem; font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s;
+  }
+  .btn-outline-white:hover { background: rgba(255,255,255,0.08); }
+
+  /* FOOTER */
+  footer {
+    background: var(--cream-dark);
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  .footer-inner { max-width: 1100px; margin: 0 auto; }
+  .footer-logo { font-family: 'Manrope', sans-serif; font-weight: 800; color: var(--navy); font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--coral); }
+  footer p { font-size: 0.85rem; color: var(--text-muted); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; gap: 3rem; padding-top: 100px; min-height: auto; padding-bottom: 60px; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .why-grid, .formats-grid, .reviews-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hero-visual { order: -1; }
+    .badge-float.b2 { left: 10px; top: 10px; }
+    .badge-float.b1 { right: 10px; bottom: -10px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .type-cursor { animation: none; }
+    * { transition-duration: 0.01ms !important; }
+  }
+</style>
 </head>
 <body>
 
-<div class="container" id="mainContainer">
-    <!-- Стартовая милая гифка -->
-  
-    <h1 id="question">Ты будешь моим парнем?) 👉👈</h1>
-    
-    <div class="buttons">
-        <button id="btnYes">Да!</button>
-        <button id="btnNo">Нет</button>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#"><span>ENG</span>·репетитор</a>
+    <ul class="nav-links">
+      <li><a href="#about">Обо мне</a></li>
+      <li><a href="#why">Почему я</a></li>
+      <li><a href="#formats">Форматы</a></li>
+      <li><a href="#reviews">Отзывы</a></li>
+      <li><a href="#contact" class="nav-cta">Записаться</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section>
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Онлайн · из любой точки мира</div>
+      <h1>Говоришь<br>по-английски<br><em id="typed-text">с первого урока</em></h1>
+      <p class="hero-sub">
+        10 лет профильного английского, сотни часов практики — и ни одного скучного урока.
+        Занятия из Сербии, для русскоязычных по всему миру.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Записаться на пробный</a>
+        <a href="#about" class="btn-secondary">Узнать больше</a>
+      </div>
     </div>
-</div>
+
+    <div class="hero-visual">
+      <div class="chat-card">
+        <div class="chat-header">
+          <div class="avatar">ИМ</div>
+          <div>
+            <div class="chat-name">Репетитор</div>
+            <div class="chat-status">● Онлайн сейчас</div>
+          </div>
+        </div>
+
+        <div class="msg">
+          <div class="msg-teacher">So, what do you want to talk about today? 😊</div>
+          <div class="msg-tag">Репетитор · сейчас</div>
+        </div>
+        <div class="msg">
+          <div class="msg-student">Hmm... I want to tell about my trip to Belgrade!</div>
+          <div class="msg-tag msg-tag-right">Ты · сейчас</div>
+        </div>
+        <div class="msg">
+          <div class="msg-teacher">Perfect! Let's go — tell me everything<span class="type-cursor"></span></div>
+          <div class="msg-tag">Репетитор · сейчас</div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat">
+            <span class="stat-num">10</span>
+            <span class="stat-label">лет опыта</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">C1+</span>
+            <span class="stat-label">уровень</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">50+</span>
+            <span class="stat-label">учеников</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section-full" id="about">
+  <div class="section-full-inner">
+    <span class="section-tag">Обо мне</span>
+    <h2 class="section-title">Репетитор, который<br>сам через это прошёл</h2>
+    <div class="about-grid">
+      <div class="about-photo-wrap">
+        <div class="about-photo-placeholder">
+          <div class="photo-icon">📷</div>
+          <span>А ты еще не поступил, лох</span>
+        </div>
+        <div class="badge-float b1">
+          <div class="badge-dot"></div>
+          Онлайн · принимаю учеников
+        </div>
+        <div class="badge-float b2">
+          🇷🇸 Живу в Сербии
+        </div>
+      </div>
+      <div class="about-text">
+        <p>
+          Меня зовут <strong>Алексей</strong>. Я учу английский 10 лет — профильно, осознанно,
+          с реальным погружением в язык. Сейчас живу в Сербии и преподаю онлайн ученикам
+          из России, Беларуси, Украины и других стран.
+        </p>
+        <p>
+          Я не читаю правила из учебника. Мои уроки — это живые разговоры, разбор ситуаций
+          из твоей жизни, фильмы, музыка и практика с первой минуты.
+          <strong>Ты уходишь с каждого урока с ощущением прогресса</strong>, а не с домашним заданием.
+        </p>
+        <p>
+          Работаю со взрослыми и старшеклассниками: разговорный английский, подготовка к
+          IELTS и TOEFL, бизнес-общение, английский для переезда.
+        </p>
+        <div class="certs">
+          <span class="cert">10 лет профильного English</span>
+          <span class="cert">Уровень C1 / C2</span>
+          <span class="cert">Живу и работаю из Сербии</span>
+          <span class="cert">Разговорный подход</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="section" id="why">
+  <span class="section-tag">Почему я</span>
+  <h2 class="section-title">Никакой воды.<br>Только живой язык.</h2>
+  <p class="section-sub">Вот чем мои уроки отличаются от стандартных курсов и репетиторов.</p>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🗣️</div>
+      <h3>Говоришь с первого урока</h3>
+      <p>Никакой "сначала теория". На первом занятии ты уже разговариваешь — пусть и с ошибками. Ошибки — это процесс.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🎯</div>
+      <h3>Программа под тебя</h3>
+      <p>Не шаблонный курс из 40 уроков. Мы разбираем то, что нужно именно тебе: работа, путешествия, переезд или сериалы.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🔥</div>
+      <h3>Уроки без скуки</h3>
+      <p>Дискуссии, кейсы, реальные ситуации. Никаких упражнений из учебника 2003 года. Язык должен быть интересным.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📍</div>
+      <h3>Понимаю твой контекст</h3>
+      <p>Я сам русскоязычный. Знаю, где ваши типичные ошибки, где страх говорить и как с этим работать быстрее.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">💬</div>
+      <h3>Поддержка между уроками</h3>
+      <p>Telegram для вопросов, рекомендации материалов и разбор ситуаций, которые возникли в жизни между занятиями.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🌍</div>
+      <h3>Онлайн из любой точки</h3>
+      <p>Zoom + интерактивная доска. Занятия в удобное время независимо от твоего часового пояса. Никаких ограничений.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATS -->
+<section class="section-full" id="formats">
+  <div class="section-full-inner">
+    <span class="section-tag">Форматы и цены</span>
+    <h2 class="section-title">Выбери свой формат</h2>
+    <p class="section-sub">Первый пробный урок — бесплатно. Без обязательств.</p>
+    <div class="formats-grid">
+      <div class="format-card">
+        <div class="format-name">Разовые уроки</div>
+        <div class="format-desc">Для тех, кто хочет попробовать или работает в свободном ритме.</div>
+        <div class="format-price">1 200 ₽</div>
+        <div class="format-period">за 60 минут</div>
+        <ul class="format-features">
+          <li class="format-feature">Разговорная практика</li>
+          <li class="format-feature">Разбор конкретных тем</li>
+          <li class="format-feature">Гибкое расписание</li>
+          <li class="format-feature">Запись урока по запросу</li>
+        </ul>
+        <a href="#contact" class="btn-secondary format-cta">Записаться</a>
+      </div>
+      <div class="format-card featured">
+        <div class="popular-tag">Популярный</div>
+        <div class="format-name">Пакет 8 уроков</div>
+        <div class="format-desc">Оптимальный вариант для стабильного прогресса и видимого результата.</div>
+        <div class="format-price">8 500 ₽</div>
+        <div class="format-period">пакет · ~1 050 ₽/урок</div>
+        <ul class="format-features">
+          <li class="format-feature">Персональная программа</li>
+          <li class="format-feature">2 урока в неделю</li>
+          <li class="format-feature">Домашние задания</li>
+          <li class="format-feature">Поддержка в Telegram</li>
+        </ul>
+        <a href="#contact" class="btn-primary format-cta">Начать</a>
+      </div>
+      <div class="format-card">
+        <div class="format-name">IELTS / Экзамены</div>
+        <div class="format-desc">Целевая подготовка к IELTS, TOEFL или кембриджским экзаменам.</div>
+        <div class="format-price">1 400 ₽</div>
+        <div class="format-period">за 60 минут</div>
+        <ul class="format-features">
+          <li class="format-feature">Стратегия каждой части</li>
+          <li class="format-feature">Пробные тесты</li>
+          <li class="format-feature">Разбор ошибок Writing</li>
+          <li class="format-feature">Speaking practice</li>
+        </ul>
+        <a href="#contact" class="btn-secondary format-cta">Записаться</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section" id="reviews">
+  <span class="section-tag">Отзывы</span>
+  <h2 class="section-title">Что говорят ученики</h2>
+  <p class="section-sub">Реальные истории — добавь свои после первых уроков.</p>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">
+        "До занятий я боялась открыть рот на английском. Уже через месяц разговаривала с коллегами на работе — впервые без страха."
+      </p>
+      <div class="reviewer">
+        <div class="reviewer-avatar" style="background: #1a3260;">АК</div>
+        <div>
+          <div class="reviewer-name">Анна К.</div>
+          <div class="reviewer-sub">Москва · разговорный английский</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">
+        "Готовился к IELTS и думал, что надо 6 месяцев. За 10 недель целевой подготовки получил 7.0. Очень структурированный подход."
+      </p>
+      <div class="reviewer">
+        <div class="reviewer-avatar" style="background: #e8542a;">ДМ</div>
+        <div>
+          <div class="reviewer-name">Дмитрий М.</div>
+          <div class="reviewer-sub">IELTS 7.0 · Санкт-Петербург</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">
+        "Переехала в Германию, нужен был английский для работы. Уроки живые, без стресса — уже провожу встречи на английском."
+      </p>
+      <div class="reviewer">
+        <div class="reviewer-avatar" style="background: #0f6e56;">МС</div>
+        <div>
+          <div class="reviewer-name">Мария С.</div>
+          <div class="reviewer-sub">Берлин · бизнес-английский</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>Первый урок — бесплатно</h2>
+  <p>Познакомимся, определим твой уровень и поставим цель. Никаких обязательств — только практика.</p>
+  <div class="cta-actions">
+    <a href="https://t.me/ТВОЙ_USERNAME" class="btn-white" target="_blank">Разработка</a>
+    <a href="mailto:rejmrk6@gmail.com" class="btn-outline-white">Написать на почту</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo"><span>ENG</span>·репетитор</div>
+    <p>Онлайн-репетитор английского языка · Сербия · Работаю по всему миру</p>
+    <p style="margin-top: 8px;">© 2026 · Сделано с ❤️ и 10 годами английского</p>
+  </div>
+</footer>
 
 <script>
-    const btnNo = document.getElementById('btnNo');
-    const btnYes = document.getElementById('btnYes');
-    const question = document.getElementById('question');
-    const gif = document.getElementById('gif');
+const phrases = [
+  'с первого урока',
+  'без страха',
+  'для жизни',
+  'для карьеры',
+  'для переезда',
+];
+let pi = 0, ci = 0, deleting = false;
+const el = document.getElementById('typed-text');
 
-    // Функция, которая заставляет кнопку убегать
-    function moveButton() {
-        // Убираем кнопку из обычного потока документа, чтобы она летала по всему экрану
-        btnNo.style.position = 'fixed';
-        
-        // Вычисляем случайные координаты внутри видимого окна
-        const maxX = window.innerWidth - btnNo.offsetWidth;
-        const maxY = window.innerHeight - btnNo.offsetHeight;
-        
-        const randomX = Math.random() * maxX;
-        const randomY = Math.random() * maxY;
-
-        // Применяем новые координаты
-        btnNo.style.left = `${randomX}px`;
-        btnNo.style.top = `${randomY}px`;
+function type() {
+  const phrase = phrases[pi];
+  if (!deleting) {
+    el.textContent = phrase.slice(0, ci + 1);
+    ci++;
+    if (ci === phrase.length) {
+      deleting = true;
+      setTimeout(type, 2000);
+      return;
     }
+  } else {
+    el.textContent = phrase.slice(0, ci - 1);
+    ci--;
+    if (ci === 0) {
+      deleting = false;
+      pi = (pi + 1) % phrases.length;
+    }
+  }
+  setTimeout(type, deleting ? 60 : 90);
+}
 
-    // Триггер для компьютеров (наведение мыши)
-    btnNo.addEventListener('mouseover', moveButton);
-    
-    // Триггер для смартфонов (касание экрана)
-    btnNo.addEventListener('touchstart', (e) => {
-        e.preventDefault(); // Запрещаем браузеру регистрировать нажатие
-        moveButton();
-    }, { passive: false });
-    
-    // На всякий случай добавляем убегание и по клику
-    btnNo.addEventListener('click', moveButton);
+setTimeout(type, 1200);
 
-    // Счастливый конец, если нажали "Да"
-    btnYes.addEventListener('click', () => {
-        question.innerText = "Ура! Я так и знал! 🥰❤️";
-        // Меняем гифку на другую
-        gif.src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif"; 
-        
-        // Прячем обе кнопки
-        btnNo.style.display = 'none';
-        btnYes.style.display = 'none';
-    });
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
 </script>
-
 </body>
 </html>
